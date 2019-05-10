@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 69811924213307523}
+  - component: {fileID: -3739372486533648821}
   m_Layer: 0
   m_Name: Tetrimino_Long
   m_TagString: Untagged
@@ -34,6 +35,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3739372486533648821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215281107555925665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5d60dc4c5224442b4e806a00438951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3640647569821507645
 GameObject:
   m_ObjectHideFlags: 0
