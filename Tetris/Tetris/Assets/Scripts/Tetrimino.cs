@@ -52,7 +52,21 @@ public class Tetrimino : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow)) 
         {
+           if(AllowRotation) {
+
+               if(LimitRotation) {
+                   
+                   if(transform.rotation.eulerAngles.z >= 90) {
+                       transform.Rotate(0,0,-90);
+                   }
+                   else {
+                       transform.Rotate(0,0,90);
+                   }
+               }
+
+             else {
            transform.Rotate (0,0,90);
+             }
 
             if (CheckIsValidPosition()) 
            {
@@ -60,8 +74,21 @@ public class Tetrimino : MonoBehaviour
            }
            else 
            {
+               if(LimitRotation) {
+
+               if(transform.rotation.eulerAngles.z >= 90)
+               {
+                   transform.Rotate(0,0,-90);
+               }
+               else 
+               {
+                  transform.Rotate(0,0,90);
+               }
+           }  else {
                transform.Rotate(0,0,-90);
            }
+             }
+        }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - fall >= fallSpeed) 
         {
@@ -74,6 +101,9 @@ public class Tetrimino : MonoBehaviour
            else 
            {
                transform.position += new Vector3(0,1,0);
+               
+               enabled = false;
+               FindObjectOfType<Game>().SpawnTetrimino();
            }
 
            fall = Time.time;
