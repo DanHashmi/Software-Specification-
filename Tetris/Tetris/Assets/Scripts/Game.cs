@@ -15,6 +15,62 @@ public class Game : MonoBehaviour
         SpawnTetrimino();
     }
 
+    public bool IsRowFull (int y) 
+    {
+        for(int x = 0; x < gridWidth; ++x)
+        {
+            if(array[x,y] == null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void DeleteMino (int y) 
+    {
+        for (int x = 0; x < gridWidth; ++x)
+        {
+            Destroy (array[x, y].gameObject);
+            array[x, y] = null;
+        }
+    }
+
+    public void MoveRowDown (int y) 
+    {
+        for(int x = 0; x < gridWidth; ++x)
+        {
+            if(array[x,y] != null)
+            {
+                array[x, y -1] = array[x,y];
+                array[x,y] = null;
+                array[x, y - 1].position += new Vector3(0, -1, 0);
+            }
+        }
+    }
+
+    public void MoveAllRowsDown(int y)
+    {
+        for(int i = y; i < gridHeight; ++i)
+        {
+            MoveRowDown(i);
+        }
+    }
+
+    public void DeleteRow()
+    {
+        for (int y = 0; y < gridHeight; ++y) 
+        {
+            if (IsRowFull(y))
+            {
+                DeleteMino(y);
+
+                MoveAllRowsDown(y + 1);
+                --y;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
