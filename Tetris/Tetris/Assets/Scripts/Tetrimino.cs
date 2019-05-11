@@ -30,7 +30,7 @@ public class Tetrimino : MonoBehaviour
               
               if (CheckIsValidPosition()) 
            {
-               // Inside Grid
+               FindObjectOfType<Game>().UpdateGrid(this);
            }
            else 
            {
@@ -43,7 +43,7 @@ public class Tetrimino : MonoBehaviour
 
               if (CheckIsValidPosition()) 
            {
-               // Inside Grid
+               FindObjectOfType<Game>().UpdateGrid(this);
            }
            else 
            {
@@ -70,7 +70,7 @@ public class Tetrimino : MonoBehaviour
 
             if (CheckIsValidPosition()) 
            {
-               // Inside Grid
+               FindObjectOfType<Game>().UpdateGrid(this);
            }
            else 
            {
@@ -96,7 +96,7 @@ public class Tetrimino : MonoBehaviour
 
               if (CheckIsValidPosition()) 
            {
-               // Inside Grid
+               FindObjectOfType<Game>().UpdateGrid(this);
            }
            else 
            {
@@ -113,7 +113,13 @@ public class Tetrimino : MonoBehaviour
        foreach (Transform mino in transform)
        {
            Vector2 pos = FindObjectOfType<Game>().Round(mino.position);
+           
            if (FindObjectOfType<Game>().CheckIsInsideGrid (pos) == false) 
+           {
+               return false;
+           }
+
+           if(FindObjectOfType<Game>().GetTransformAtGridPosition(pos) != null && FindObjectOfType<Game>().GetTransformAtGridPosition(pos).parent != transform)
            {
                return false;
            }

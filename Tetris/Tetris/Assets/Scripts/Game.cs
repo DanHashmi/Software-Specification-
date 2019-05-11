@@ -7,7 +7,8 @@ public class Game : MonoBehaviour
     public static int gridWidth = 10;
     public static int gridHeight = 20;
 
-    
+    public static Transform[,] array = new Transform[gridWidth, gridHeight];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,34 @@ public class Game : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateGrid(Tetrimino tetrimino)
+    {
+        //Transform[,] array = new Transform[gridWidth, gridHeight];
+
+        for (int y = 0; y < gridHeight; ++y) 
+        {
+            for (int x = 0; x < gridWidth; ++x) 
+            {
+                if (array[x, y] != null)
+                {
+                    if (array[x, y].parent == tetrimino.transform)
+                    {
+                        array[x, y] = null;
+                    }
+                }
+            }
+        }
+        
+        foreach (Transform mino in tetrimino.transform)
+        {
+            Vector2 pos = Round(mino.position);
+            if (pos.y < gridHeight)
+            {
+                array[(int)pos.x, (int)pos.y] = mino;
+            }
+        }
     }
 
     public void SpawnTetrimino() 
@@ -32,6 +61,20 @@ public class Game : MonoBehaviour
     public Vector2 Round (Vector2 pos) {
         return new Vector2 (Mathf.Round(pos.x), Mathf.Round(pos.y));
     }
+
+    public Transform GetTransformAtGridPosition(Vector2 pos)
+    {
+        // Transform[,] array = new Transform[gridWidth, gridHeight];
+        if (pos.y > gridHeight -1)
+        {
+            return null;
+        }
+        else 
+        {
+            return array[(int)pos.x, (int)pos.y];
+        }
+    }
+    
     string GetRandomTetrimino() 
     {
         int randomTetrimino = Random.Range(1,8);
