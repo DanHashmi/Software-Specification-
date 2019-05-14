@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Game : MonoBehaviour
 {
     public static int gridWidth = 10;
@@ -13,6 +14,24 @@ public class Game : MonoBehaviour
     void Start()
     {
         SpawnTetrimino();
+    }
+
+    public bool CheckIsAboveGrid(Tetrimino tetrimino) 
+    {
+        for(int x = 0; x < gridWidth; ++x)
+        {
+            foreach(Transform mino in tetrimino.transform)
+            {
+                Vector2 pos = Round(mino.position);
+
+                if (pos.y > gridHeight - 1)
+                {
+                    return true;
+
+                }
+            }
+        }
+    return false;
     }
 
     public bool IsRowFull (int y) 
@@ -168,4 +187,10 @@ public class Game : MonoBehaviour
         }
       return randomTetriminoName;
     } 
+
+public void GameOver()
+{
+    Application.LoadLevel("GameIsOver");
+}
+
 }
